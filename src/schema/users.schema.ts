@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 15:04:58
- * @LastEditTime: 2021-01-02 22:39:59
+ * @LastEditTime: 2021-01-02 23:18:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/schema/users.schema.ts
@@ -22,6 +22,9 @@ export class User {
 
   @Prop(String)
   email?: string;
+
+  @Prop(String)
+  salt: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

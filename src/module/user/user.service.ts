@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 15:03:15
- * @LastEditTime: 2021-01-02 22:49:11
+ * @LastEditTime: 2021-01-03 01:45:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/user/user.service.ts
@@ -49,6 +49,7 @@ export class UserService {
       name,
       passwd: hashPasswd,
       email,
+      salt,
       create_time: Date.now().toString()
     }
     console.log(data);
@@ -57,7 +58,10 @@ export class UserService {
       await this.userModule(data).save();
       return { msg: '注册用户成功' }
     } catch (error) {
-
+      throw new HttpException({
+        message: '服务器错误',
+        status: HttpStatus.FORBIDDEN
+      }, 403)
     }
 
   }
