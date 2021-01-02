@@ -1,15 +1,13 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-02 11:43:11
- * @LastEditTime: 2021-01-02 11:55:36
+ * @LastEditTime: 2021-01-02 15:29:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/schema/article.schema.ts
  */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
 
-export type CatDocument = Article & Document;
 
 @Schema()
 export class Article {
