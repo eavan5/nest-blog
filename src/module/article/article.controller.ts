@@ -16,7 +16,7 @@ export class ArticleController {
   constructor(private ArticleService: ArticleService) { }
   @Get()
   async list() {
-    const result = await this.ArticleService.findAll({ title: '21', content: '21212', _id: '21323' })
+    const result = await this.ArticleService.findAll()
     return result
   }
 

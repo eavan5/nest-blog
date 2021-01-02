@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-01-02 19:25:47
+ * @LastEditTime: 2021-01-02 19:49:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -16,7 +16,7 @@ export class ArticleService {
   constructor(@InjectModel('Article') private ArticleModel) { }
 
   //查询列表带分页
-  async findAll(params: Article, fields?: string): Promise<any | undefined> {
+  async findAll(params: Article = {}, fields?: string): Promise<any | undefined> {
     const result = await this.ArticleModel.find(params).exec()
     return result
   }
