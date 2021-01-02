@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-01-02 13:02:41
+ * @LastEditTime: 2021-01-02 14:09:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -12,8 +12,8 @@ import { InjectModel } from '@nestjs/mongoose'
 @Injectable()
 export class ArticleService {
   constructor(@InjectModel('Article') private ArticleModel) { }
-  async findAll() {
-    const result = await this.ArticleModel.find().exec()
+  async findAll(params = {}) {
+    const result = await this.ArticleModel.find(params).exec()
     return result
   }
 }
