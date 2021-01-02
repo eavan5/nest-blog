@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 15:03:15
- * @LastEditTime: 2021-01-02 19:35:00
+ * @LastEditTime: 2021-01-02 19:38:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/user/user.service.ts
@@ -35,6 +35,7 @@ export class UserService {
   async registerUser(requestBody: User): Promise<any | undefined> {
     const { name, passwd, email } = requestBody
     const hasSame = await this.findOne(name)
+    // if()
   }
 
 }
