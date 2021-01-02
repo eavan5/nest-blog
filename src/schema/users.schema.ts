@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 15:04:58
- * @LastEditTime: 2021-01-02 19:16:15
+ * @LastEditTime: 2021-01-02 22:39:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/schema/users.schema.ts
@@ -16,8 +16,8 @@ export class User {
 
   @Prop(String)
   passwd?: string;
-
-  @Prop({ required: false })
+  
+  @Prop(String)
   create_time?: string;
 
   @Prop(String)

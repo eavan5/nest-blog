@@ -1,14 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 15:03:15
- * @LastEditTime: 2021-01-02 19:38:36
+ * @LastEditTime: 2021-01-02 22:49:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/user/user.service.ts
  */
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../../interface/user.interface'
+import { makeSalt, encryptPassword } from '../../utils/cryptogram'
 
 @Injectable()
 export class UserService {
@@ -34,8 +35,31 @@ export class UserService {
    */
   async registerUser(requestBody: User): Promise<any | undefined> {
     const { name, passwd, email } = requestBody
-    const hasSame = await this.findOne(name)
-    // if()
+    // 不能有相同用户名
+    const sameInfo = await this.findOne(name)
+    if (sameInfo.length) {
+      throw new HttpException({
+        message: '用户名重复',
+        status: HttpStatus.FORBIDDEN
+      }, 403)
+    }
+    const salt = makeSalt(); // 制作密码盐
+    const hashPasswd = encryptPassword(passwd, salt);  // 加密密码
+    const data = {
+      name,
+      passwd: hashPasswd,
+      email,
+      create_time: Date.now().toString()
+    }
+    console.log(data);
+
+    try {
+      await this.userModule(data).save();
+      return { msg: '注册用户成功' }
+    } catch (error) {
+
+    }
+
   }
 
 }
