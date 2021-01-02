@@ -12,6 +12,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MONGO_DB } from './app.config';
 import { ArticleModule } from './module/article/article.module';
+import { UserModule } from './module/user/user.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ArticleModule } from './module/article/article.module';
       useNewUrlParser: true,
     }),
     ArticleModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
