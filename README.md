@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-03 17:31:45
+ * @LastEditTime: 2021-01-03 20:23:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/README.md
@@ -57,7 +57,7 @@ $ npm run test:cov
 
 ## 文档说明 
 
-> <auth>表示需要token认证
+> 有auth的接口表示需要token认证,token默认有效期为30天
 
 ## 文章模块
 
@@ -90,7 +90,9 @@ $ npm run test:cov
 6. category_id:文章分类id
 7. tag_id：标签id
 8. create_time:发布时间
-9. update_time:发布时间
+9. update_time:更新时间
+10. views:查看次数
+11. hidden:是否隐藏(0是显示,默认是1隐藏)
 
 ### commons：评论
 

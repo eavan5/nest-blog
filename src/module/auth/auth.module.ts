@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 23:03:44
- * @LastEditTime: 2021-01-03 01:15:20
+ * @LastEditTime: 2021-01-03 19:18:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/auth/auth.module.ts
@@ -14,7 +14,7 @@ import { LocalStrategy } from './local.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JWT_CONFIG } from '../../app.config';
-
+``
 
 
 @Module({
@@ -22,7 +22,7 @@ import { JWT_CONFIG } from '../../app.config';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: JWT_CONFIG.secret,
-      signOptions: { expiresIn: '8h' }, // token 过期时效
+      signOptions: { expiresIn: '30d' }, // token 过期时效
     }),
     UserModule,
   ],

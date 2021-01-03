@@ -2,15 +2,16 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-01-03 17:06:38
+ * @LastEditTime: 2021-01-03 22:03:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
  */
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotAcceptableException, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose'
 import { Article } from '../../interface/article.interface'
 import { Pagination } from '../../interface/pagination.interface'
+import { getDefaultOptions } from './article.model'
 
 @Injectable()
 export class ArticleService {
@@ -25,10 +26,12 @@ export class ArticleService {
   //查找文章
   async findOne(id: string): Promise<any> {
     try {
-      const result = await this.ArticleModel.find({ _id: id })
+      const article = await this.ArticleModel.findOne({ _id: id, hidden: 0 })
+      article.views++
+      article.save()
       return {
         msg: 'success',
-        data: result[0]
+        data: article
       }
     } catch (error) {
       throw new NotFoundException({
@@ -44,20 +47,34 @@ export class ArticleService {
 
   //增加数据
   async addData(params: Article): Promise<any | undefined> {
-    const result = this.ArticleModel(params).save()
-    return result
+    const data = { ...params, ...getDefaultOptions() }
+    console.log(data);
+
+    try {
+      await this.ArticleModel({ ...params, ...getDefaultOptions() }).save()
+      return { msg: "添加成功" }
+    } catch (error) {
+      throw new NotAcceptableException({ message: error.message });
+
+    }
   }
 
   //修改数据
   async updateArticle(params: Article, params2: Article): Promise<any | undefined> {
-    await this.ArticleModel.updateOne(params, params2)
+    await this.ArticleModel.updateOne(params, { ...params2, update_time: Date.now() })
     return {
       msg: '恭喜您,修改成功'
     }
   }
 
   //删除数据
-  deleteArticle(params: Article): Promise<any | undefined> {
-    return this.ArticleModel.deleteOne(params)
+  async deleteArticle(id: string): Promise<any | undefined> {
+    const data = { _id: id }
+    console.log(22);
+    console.log(data);
+
+    const result = await this.ArticleModel.updateOne({ _id: id }, { hidden: 1 })
+    console.log(result);
+
   }
 }

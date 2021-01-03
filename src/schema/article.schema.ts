@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-02 11:43:11
- * @LastEditTime: 2021-01-02 15:29:26
+ * @LastEditTime: 2021-01-03 20:25:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/schema/article.schema.ts
@@ -21,13 +21,22 @@ export class Article {
   author_id: string;
 
   @Prop(String)
-  add_time: string;
+  desc: string
+
+  @Prop(Number)
+  add_time: number;
+
+  @Prop(Number)
+  views: number;
 
   @Prop(String)
-  update_time: string;
+  update_time: number;
 
   @Prop(String)
   category_id: string;
+
+  @Prop(Number)
+  hidden: number;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);

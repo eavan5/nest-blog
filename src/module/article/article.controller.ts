@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-01-03 17:01:33
+ * @LastEditTime: 2021-01-03 20:21:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
@@ -37,9 +37,8 @@ export class ArticleController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  async addArticle() {
-    const result = await this.ArticleService.addData({ title: '增加的数据', content: '增加的数据' })
-    return result
+  addArticle(@Body() body: Article) {
+    return this.ArticleService.addData(body)
   }
 
   //修改
@@ -49,19 +48,13 @@ export class ArticleController {
     @Param() param: any,
     @Body() body: Article
   ) {
-    console.log(param);
-    console.log(body);
-    
     const result = await this.ArticleService.updateArticle({ _id: param.id }, body)
     return result
   }
 
-  @Delete()
-  async deleteArticle() {
-    const result = await this.ArticleService.deleteArticle({
-      _id: '5ff00da99d1cb03cb8796e4a'
-    })
-    return result
+  @Delete(':id')
+  deleteArticle(@Param() Param: any) {
+    return this.ArticleService.deleteArticle(Param.id)
   }
 
 }
