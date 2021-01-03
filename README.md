@@ -1,16 +1,49 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-03 20:23:23
+ * @LastEditTime: 2021-01-04 14:01:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/README.md
 -->
 # 介绍
 
-> 这是一个由nodejs搭建的博客系统,不断完善中...
+> 这是一个由nodejs搭建的博客系统,不断完善中,部分数据库设计借鉴php程序typeecho,在一步一步完善中...
 
-# 技术栈
+## TO DO LIST
+
+
+- [ ] 用户模块
+  - [x] 用户注册
+  - [x] 用户登录
+  - [x] 用户权限认证
+  - [ ] 用户组权限控制
+- [ ] 认证模块
+  - [x] 普通用户校验
+
+- [ ] 文章模块
+  - [x] 文章查看
+  - [x] 文章列表查询分页
+  - [x] 文章删除,修改
+  - [x] 文章修改
+  - [ ] 文章自增id(目前用的是自带主键ID)
+  - [ ] 文章的type(以后用来区分相册,微博这种)
+  - [ ] 文章的标签,分类建成一个集,拿组件id关联到文章集合里面
+  - [ ] 上传的数据进行用pipe做校验
+
+- [ ] 评论模块
+  > 这个在纠结到底用第三方模块还是使用自己的
+
+- [ ] 文件存储
+  > 这个准备接入阿里的oss存储+CDN,域名在备案中...
+
+- [ ] 服务端日志系统
+
+- [ ] 前端展示
+  > 目前还没想到到底做什么样子的
+  
+
+## 技术栈
 
 **后端：nestjs + typescript + MongoDB**
 
@@ -65,8 +98,9 @@ $ npm run test:cov
 
 1. @GET query({pageSize=10,pageCurrent=1}  ) 拉取文章列表
 2. @GET /param(_id:string) param 读取文章详情  
-3. @PUT /param(_id:string)   + body(article:Article) <auth>  修改文章详情
-4. @POST body(article:Article) <auth>
+3. @PUT /param(_id:string)   + body(article:Article) [auth] 修改文章详情
+4. @POST body(article:Article) [auth]  创建文章
+5. @Delete /param(_id:string)  [auth]  删除文章
 
 ### 用户模块
 
@@ -74,8 +108,8 @@ $ npm run test:cov
 
 > /user/
 
-1. POST body({name:string,passwd:string}  ) 注册用户
-2. POST param /login body({name:string,passwd:string}  ) 用户登录
+1. POST body({name:string,passwd:string}) 注册用户
+2. POST param /login body({name:string,passwd:string}) 用户登录
 
 # DATABASE DESCRIPTION
 ## 集合

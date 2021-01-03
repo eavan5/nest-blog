@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-01-03 20:21:38
+ * @LastEditTime: 2021-01-03 22:10:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
@@ -52,6 +52,7 @@ export class ArticleController {
     return result
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   deleteArticle(@Param() Param: any) {
     return this.ArticleService.deleteArticle(Param.id)
