@@ -1,74 +1,91 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+<!--
+ * @Author: your name
+ * @Date: 2021-01-02 10:59:57
+ * @LastEditTime: 2021-01-03 17:27:09
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /nest-blog/README.md
+-->
+# 介绍
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+> 这是一个由nodejs搭建的博客系统,不断完善中...
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# 技术栈
 
-## nest-blog搭建中
-## Description
+**后端：nestjs + typescript + MongoDB**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**前端：vue3 + typescript**
 
-## Installation
+# 接口文档
+# 接口文档
 
-```bash
-$ npm install
-```
+> 接口采用RESTful API设计规范
 
-## Running the app
+## 文档说明 
 
-```bash
-# development
-$ npm run start
+> <auth>表示需要token认证
 
-# watch mode
-$ npm run start:dev
+## 文章模块
 
-# production mode
-$ npm run start:prod
-```
+> /article/
 
-## Test
+1. @GET query({pageSize=10,pageCurrent=1}  ) 拉取文章列表
+2. @GET /param(_id:string) param 读取文章详情  
+3. @PUT /param(_id:string)   + body(article:Article) <auth>  修改文章详情
+4. @POST body(article:Article) <auth>
 
-```bash
-# unit tests
-$ npm run test
+### 用户模块
 
-# e2e tests
-$ npm run test:e2e
+ 
 
-# test coverage
-$ npm run test:cov
-```
+> /user/
 
-## Support
+1. POST body({name:string,passwd:string}  ) 注册用户
+2. POST param /login body({name:string,passwd:string}  ) 用户登录
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# 数据库定义
+## 集合
 
-## Stay in touch
+### articles：文章集合
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+1. _id:文章id（默认主键）
+2. title：文章标题
+3. content：文章内容
+4. author_id:作者id
+5. desc:文章描述
+6. category_id:文章分类id
+7. tag_id：标签id
+8. create_time:发布时间
+9. update_time:发布时间
 
-## License
+### commons：评论
 
-Nest is [MIT licensed](LICENSE).
+1. _id:评论id（默认主键）
+2. name：姓名
+3. email：邮箱
+4. content：内容
+5. create_time:评论时间
+6. connect_id:关联的文章id（外键）
+
+### users:用户
+
+1. _id:用户id（默认主键）
+2. name:用户名
+3. passwd：密码
+4. create_time:创建时间
+5. email：邮箱（头像使用gravatar服务）
+6. salt:盐，加密验证用的随机字符串
+
+### classes：分类以及标签
+
+1. _id:分类id（默认主键）
+2. type: 类型（ tag，category 标签或者是分类）
+3. title：标题
+4. desc：描述
+
+### relationships：关联表
+
+1. _id:ID（默认主键）
+2. article_id:文章id
+3. class_id:分类id
+
