@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 23:05:51
- * @LastEditTime: 2021-01-03 03:12:46
+ * @LastEditTime: 2021-01-03 17:06:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/auth/jwt.strategy.ts
@@ -32,7 +32,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     console.log(user);
 
     if (!user) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException({
+        message: '没有权限'
+      });
     }
     return payload;
   }
