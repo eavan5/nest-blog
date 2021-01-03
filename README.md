@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-03 17:27:09
- * @LastEditors: your name
+ * @LastEditTime: 2021-01-03 17:31:45
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/README.md
 -->
@@ -16,8 +16,42 @@
 
 **前端：vue3 + typescript**
 
-# 接口文档
-# 接口文档
+# 起步
+ ```
+ $ npm install
+ ```
+
+## development
+```
+$ npm run start
+```
+
+## watch mode
+```
+$ npm run start:dev
+```
+
+## production mode
+```
+$ npm run start:prod
+```
+# Test
+## unit tests
+```
+$ npm run test
+```
+
+## e2e tests
+```
+$ npm run test:e2e
+```
+
+## test coverage
+```
+$ npm run test:cov
+```
+
+# API DOCUMENT
 
 > 接口采用RESTful API设计规范
 
@@ -43,7 +77,7 @@
 1. POST body({name:string,passwd:string}  ) 注册用户
 2. POST param /login body({name:string,passwd:string}  ) 用户登录
 
-# 数据库定义
+# DATABASE DESCRIPTION
 ## 集合
 
 ### articles：文章集合
