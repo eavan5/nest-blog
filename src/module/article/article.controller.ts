@@ -1,25 +1,28 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-01-02 18:17:33
+ * @LastEditTime: 2021-01-03 02:11:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
  */
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Controller, Delete, Get, Post, Put, UseGuards } from '@nestjs/common';
 import { log } from 'util';
 import { ArticleService } from './article.service'
+import { AuthGuard } from '@nestjs/passport';
 
 
 @Controller('article')
 export class ArticleController {
   constructor(private ArticleService: ArticleService) { }
+
   @Get()
   async list() {
     const result = await this.ArticleService.findAll()
     return result
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async addArticle() {
     const result = await this.ArticleService.addData({ title: '增加的数据', content: '增加的数据' })

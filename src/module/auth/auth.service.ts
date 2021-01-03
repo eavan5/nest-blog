@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 23:04:08
- * @LastEditTime: 2021-01-03 02:03:35
+ * @LastEditTime: 2021-01-03 03:32:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/auth/auth.service.ts
@@ -18,13 +18,16 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) { }
 
-  // JWT验证 - Step 2: 校验用户信息
-  async validateUser(name: string, passwd: string): Promise<any> {
+  明文
+  //校验密码是否相等
+  validatePasswd(encryptionPassword: string, plainTextPassword: string, salt: string) {
+    return encryptionPassword === encryptPassword(plainTextPassword, salt)
+  }
+
+  //校验用户
+  async validateUser(name: string, passwd: string, JwtStrategy?: boolean): Promise<any> {
     console.log('JWT验证 - Step 2: 校验用户信息');
     const user = await this.usersService.findOne(name);
-    console.info('user的值是');
-    console.log(user);
-
     if (user.length === 1) {
       const hashedPassword = user[0].passwd;
       const salt = user[0].salt;
@@ -32,6 +35,9 @@ export class AuthService {
       const hashPassword = encryptPassword(passwd, salt);
       if (hashedPassword === hashPassword) {
         // 密码正确
+        if (JwtStrategy) {
+          return user[0]
+        }
         return this.certificate({ name, passwd });
       } else {
         // 密码错误

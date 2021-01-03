@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 23:05:51
- * @LastEditTime: 2021-01-02 23:36:32
+ * @LastEditTime: 2021-01-03 03:12:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/auth/jwt.strategy.ts
@@ -23,12 +23,17 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   // JWT验证 - Step 4: 被守卫调用
-  async validate(name: string, passwd: string) {
-    console.log(`JWT验证 - Step 4: 被守卫调用`);
-    const user = await this.AuthService.validateUser(name, passwd);
+  async validate(payload: any) {
+    console.log(11);
+
+    console.log(payload);
+
+    const user = await this.AuthService.validateUser(payload.name, payload.passwd, true);
+    console.log(user);
+
     if (!user) {
       throw new UnauthorizedException();
     }
-    return user;
+    return payload;
   }
 }
