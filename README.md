@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-04 22:56:37
+ * @LastEditTime: 2021-01-05 01:38:02
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/README.md
@@ -36,10 +36,10 @@
   - [x] 文章新增
   - [x] 文章删除
   - [x] 文章修改
+  - [x] 上传的数据进行用pipe做校验
   - [ ] 文章自增id(目前用的是自带主键ID)
   - [ ] 文章的type(以后用来区分相册,微博这种)
   - [ ] 文章的标签,分类建成一个集,拿组件id关联到文章集合里面
-  - [ ] 上传的数据进行用pipe做校验
 
 
 - [ ] 评论模块
