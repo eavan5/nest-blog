@@ -1,15 +1,17 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-04 16:54:00
- * @LastEditTime: 2021-01-04 22:48:56
+ * @LastEditTime: 2021-01-05 01:00:50
  * @LastEditors: wumao
  * @Description:  
  * @FilePath: /nest-blog/src/module/meta/meta.controller.ts
  * @website: https://www.wumao.org
  */
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UsePipes } from '@nestjs/common';
 import { MetaService } from './meta.service';
 import { AuthGuard } from '@nestjs/passport';
+import { ValidationPipe } from '../../pipe/validation.pipe'
+import { AddMetaDTO } from './meta.dto'
 
 
 @Controller('meta')
@@ -21,8 +23,9 @@ export class MetaController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @UsePipes(new ValidationPipe())
   @Post()
-  addMeta(@Body() body: any) {
+  addMeta(@Body() body: AddMetaDTO) {
     return this.MetaService.addMeta(body)
   }
   @UseGuards(AuthGuard('jwt'))
@@ -32,8 +35,9 @@ export class MetaController {
   }
 
   @UseGuards(AuthGuard('jwt'))
+  @UsePipes(new ValidationPipe())
   @Put(':_id')
-  changeMeta(@Param() param: any, @Body() body: any) {
+  changeMeta(@Param() param: any, @Body() body: AddMetaDTO) {
     return this.MetaService.changeMeta(param._id, body)
 
   }

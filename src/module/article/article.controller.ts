@@ -1,16 +1,18 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-01-03 22:10:25
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-05 00:55:05
+ * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
  */
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UsePipes } from '@nestjs/common';
 import { ArticleService } from './article.service'
 import { AuthGuard } from '@nestjs/passport';
 import { Pagination } from '../../interface/pagination.interface'
 import { Article } from 'src/interface/article.interface';
+import { ValidationPipe } from '../../pipe/validation.pipe';
+import { AddArticleDTO } from './article.dto';
 
 
 @Controller('article')
@@ -33,20 +35,22 @@ export class ArticleController {
   @Get(':_id')
   readArticle(@Param() param: Article) {
     return this.ArticleService.findOne(param._id)
-    }
+  }
 
   @UseGuards(AuthGuard('jwt'))
+  @UsePipes(new ValidationPipe())
   @Post()
-  addArticle(@Body() body: Article) {
+  addArticle(@Body() body: AddArticleDTO) {
     return this.ArticleService.addData(body)
   }
 
   //修改
   @UseGuards(AuthGuard('jwt'))
+  @UsePipes(new ValidationPipe())
   @Put(':id')
   async updateArticle(
     @Param() param: any,
-    @Body() body: Article
+    @Body() body: AddArticleDTO
   ) {
     const result = await this.ArticleService.updateArticle({ _id: param.id }, body)
     return result

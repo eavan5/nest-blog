@@ -1,15 +1,17 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 15:03:02
- * @LastEditTime: 2021-01-03 01:56:44
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-05 00:21:25
+ * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/user/user.controller.ts
  */
 
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service'
 import { AuthService } from '../auth/auth.service';
+import { ValidationPipe } from '../../pipe/validation.pipe'
+import { userDTO } from './user.dto'
 @Controller('user')
 export class UserController {
   constructor(
@@ -17,8 +19,9 @@ export class UserController {
     private authService: AuthService
   ) { }
 
+  @UsePipes(new ValidationPipe())
   @Post()
-  register(@Body() body: any) {
+  register(@Body() body: userDTO) {
     return this.userService.registerUser(body)
   }
 
