@@ -2,8 +2,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-01-03 22:03:30
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-04 19:22:18
+ * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
  */
@@ -26,9 +26,7 @@ export class ArticleService {
   //查找文章
   async findOne(id: string): Promise<any> {
     try {
-      const article = await this.ArticleModel.findOne({ _id: id, hidden: 0 })
-      article.views++
-      article.save()
+      const article = await this.ArticleModel.findOneAndUpdate({ _id: id, hidden: 0 }, { $inc: { views: 1 } }, { useFindAndModify: false })
       return {
         msg: 'success',
         data: article

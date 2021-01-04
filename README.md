@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-04 14:01:01
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-04 22:56:37
+ * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/README.md
 -->
 # 介绍
 
-> 这是一个由nodejs搭建的博客系统,不断完善中,部分数据库设计借鉴php程序typeecho,在一步一步完善中...
+> 这是一个由nodejs搭建的博客系统,不断完善中,部分数据库设计借鉴php程序typecho,在一步一步完善中...
 
 ## TO DO LIST
 
@@ -17,19 +17,30 @@
   - [x] 用户注册
   - [x] 用户登录
   - [x] 用户权限认证
-  - [ ] 用户组权限控制
+  - [x] 用户权限细分
+ 
 - [ ] 认证模块
-  - [x] 普通用户校验
+  - [ ] 用户组权限控制
+  - [ ] 用户组新增
+  - [ ] 用户组关联到用户
+
+- [X] META模块(标签/分类)
+  - [x] meta查看(根据type)
+  - [x] META及分页查询
+  - [x] META删除
+  - [x] META修改
 
 - [ ] 文章模块
   - [x] 文章查看
   - [x] 文章列表查询分页
-  - [x] 文章删除,修改
+  - [x] 文章新增
+  - [x] 文章删除
   - [x] 文章修改
   - [ ] 文章自增id(目前用的是自带主键ID)
   - [ ] 文章的type(以后用来区分相册,微博这种)
   - [ ] 文章的标签,分类建成一个集,拿组件id关联到文章集合里面
   - [ ] 上传的数据进行用pipe做校验
+
 
 - [ ] 评论模块
   > 这个在纠结到底用第三方模块还是使用自己的
@@ -110,6 +121,13 @@ $ npm run test:cov
 
 1. POST body({name:string,passwd:string}) 注册用户
 2. POST param /login body({name:string,passwd:string}) 用户登录
+### META模块
+
+ 
+
+> /meta/
+
+> 根据RESTful风格的增删改查
 
 # DATABASE DESCRIPTION
 ## 集合

@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-03 01:21:31
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-04 21:35:40
+ * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/app.module.ts
  */
@@ -15,6 +15,7 @@ import { ArticleModule } from './module/article/article.module';
 import { UserModule } from './module/user/user.module';
 import { AuthModule } from './module/auth/auth.module';
 import { UserController } from './module/user/user.controller'
+import { MetaModule } from './module/meta/meta.module';
 
 @Module({  
   imports: [
@@ -24,6 +25,7 @@ import { UserController } from './module/user/user.controller'
     ArticleModule,
     UserModule,
     AuthModule,
+    MetaModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService],

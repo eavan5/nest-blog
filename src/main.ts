@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-03 21:55:41
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-01-04 20:57:15
+ * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/main.ts
  */
@@ -10,7 +10,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
-import * as compression from 'compression';
+// import * as compression from 'compression';
 import * as helmet from 'helmet';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
@@ -19,7 +19,7 @@ async function bootstrap() {
   //成功的数据返回中间件
   app.useGlobalInterceptors(new TransformInterceptor());
   // 压缩返回数据
-  app.use(compression());
+  // app.use(compression());
   // 为了安全用的
   app.use(helmet());
   //打开cors

@@ -1,10 +1,11 @@
 /*
- * @Author: your name
+ * @Author: wumao
  * @Date: 2021-01-02 12:04:38
- * @LastEditTime: 2021-01-02 12:50:56
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditTime: 2021-01-04 21:06:30
+ * @LastEditors: wumao
+ * @Description:
  * @FilePath: /nest-blog/src/module/article/article.module.ts
+ * @website: https://www.wumao.org
  */
 import { Module } from '@nestjs/common';
 import { ArticleController } from './article.controller';
