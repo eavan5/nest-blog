@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-04 23:42:00
- * @LastEditTime: 2021-01-05 00:57:45
+ * @LastEditTime: 2021-01-05 23:04:05
  * @LastEditors: wumao
  * @Description: 
  * @FilePath: /nest-blog/src/module/article/article.dto.ts
@@ -18,5 +18,16 @@ export class AddArticleDTO {
   // readonly add_time: string;
   // readonly update_time: string;
   readonly desc: string;
+
+  // @IsArray()
+  // @ArrayUnique()
+  readonly category_id?: string[];
+
+  // @IsArray()
+  // @ArrayUnique()
+  readonly tag_id?: string[];
+
+  // readonly tag_id: string[];
+
 }
 

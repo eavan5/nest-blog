@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-01-04 19:22:18
+ * @LastEditTime: 2021-01-05 21:27:55
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -15,7 +15,10 @@ import { getDefaultOptions } from './article.model'
 
 @Injectable()
 export class ArticleService {
-  constructor(@InjectModel('Article') private ArticleModel) { }
+  constructor(
+    @InjectModel('Article') private ArticleModel
+    , @InjectModel('Meta') private MetaModel
+  ) { }
 
   //查询列表带分页
   async findAll(params: Pagination = {}, fields?: string): Promise<any | undefined> {
@@ -26,7 +29,7 @@ export class ArticleService {
   //查找文章
   async findOne(id: string): Promise<any> {
     try {
-      const article = await this.ArticleModel.findOneAndUpdate({ _id: id, hidden: 0 }, { $inc: { views: 1 } }, { useFindAndModify: false })
+      const article = await this.ArticleModel.findOneAndUpdate({ _id: id, hidden: 0 }, { $inc: { views: 1 } }, { useFindAndModify: false }).populate('category_id').populate('tag_id')
       return {
         msg: 'success',
         data: article

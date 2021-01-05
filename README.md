@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-05 01:38:02
+ * @LastEditTime: 2021-01-05 10:15:06
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/README.md
@@ -17,7 +17,7 @@
   - [x] 用户注册
   - [x] 用户登录
   - [x] 用户权限认证
-  - [x] 用户权限细分
+  - [ ] 用户权限细分
  
 - [ ] 认证模块
   - [ ] 用户组权限控制
