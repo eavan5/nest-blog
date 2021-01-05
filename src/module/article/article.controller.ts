@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-01-05 00:55:05
+ * @LastEditTime: 2021-01-06 02:22:36
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
@@ -13,6 +13,7 @@ import { Pagination } from '../../interface/pagination.interface'
 import { Article } from 'src/interface/article.interface';
 import { ValidationPipe } from '../../pipe/validation.pipe';
 import { AddArticleDTO } from './article.dto';
+import { ApiBody, ApiBearerAuth } from '@nestjs/swagger'
 
 
 @Controller('article')
@@ -40,6 +41,8 @@ export class ArticleController {
   @UseGuards(AuthGuard('jwt'))
   @UsePipes(new ValidationPipe())
   @Post()
+  @ApiBearerAuth()
+  @ApiBody({ type: [AddArticleDTO] })
   addArticle(@Body() body: AddArticleDTO) {
     return this.ArticleService.addData(body)
   }
@@ -48,6 +51,8 @@ export class ArticleController {
   @UseGuards(AuthGuard('jwt'))
   @UsePipes(new ValidationPipe())
   @Put(':id')
+  @ApiBearerAuth()
+  @ApiBody({ type: [AddArticleDTO] })
   async updateArticle(
     @Param() param: any,
     @Body() body: AddArticleDTO
@@ -58,6 +63,7 @@ export class ArticleController {
 
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
+  @ApiBearerAuth()
   deleteArticle(@Param() Param: any) {
     return this.ArticleService.deleteArticle(Param.id)
   }

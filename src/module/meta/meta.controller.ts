@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-04 16:54:00
- * @LastEditTime: 2021-01-05 01:00:50
+ * @LastEditTime: 2021-01-06 02:23:12
  * @LastEditors: wumao
  * @Description:  
  * @FilePath: /nest-blog/src/module/meta/meta.controller.ts
@@ -12,6 +12,7 @@ import { MetaService } from './meta.service';
 import { AuthGuard } from '@nestjs/passport';
 import { ValidationPipe } from '../../pipe/validation.pipe'
 import { AddMetaDTO } from './meta.dto'
+import { ApiBearerAuth } from '@nestjs/swagger'
 
 
 @Controller('meta')
@@ -25,11 +26,13 @@ export class MetaController {
   @UseGuards(AuthGuard('jwt'))
   @UsePipes(new ValidationPipe())
   @Post()
+  @ApiBearerAuth()
   addMeta(@Body() body: AddMetaDTO) {
     return this.MetaService.addMeta(body)
   }
   @UseGuards(AuthGuard('jwt'))
   @Delete(':_id')
+  @ApiBearerAuth()
   deleteMeta(@Param() param: any) {
     return this.MetaService.deleteMeta(param._id)
   }
@@ -37,6 +40,7 @@ export class MetaController {
   @UseGuards(AuthGuard('jwt'))
   @UsePipes(new ValidationPipe())
   @Put(':_id')
+  @ApiBearerAuth()
   changeMeta(@Param() param: any, @Body() body: AddMetaDTO) {
     return this.MetaService.changeMeta(param._id, body)
 
