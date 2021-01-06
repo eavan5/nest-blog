@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-05 10:15:06
+ * @LastEditTime: 2021-01-06 18:28:17
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/README.md
@@ -19,6 +19,10 @@
   - [x] 用户权限认证
   - [ ] 用户权限细分
  
+ - [ ] 公共模块
+  - [x] 接入oss文件上传
+  - [ ] oss文件列表查询
+
 - [ ] 认证模块
   - [ ] 用户组权限控制
   - [ ] 用户组新增
@@ -45,8 +49,8 @@
 - [ ] 评论模块
   > 这个在纠结到底用第三方模块还是使用自己的
 
-- [ ] 文件存储
-  > 这个准备接入阿里的oss存储+CDN,域名在备案中...
+- [x] 文件存储
+  > 已经接入阿里云oss上传
 
 - [ ] 服务端日志系统
 

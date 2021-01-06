@@ -16,6 +16,7 @@ import { UserModule } from './module/user/user.module';
 import { AuthModule } from './module/auth/auth.module';
 import { UserController } from './module/user/user.controller'
 import { MetaModule } from './module/meta/meta.module';
+import { PublishModule } from './module/publish/publish.module';
 
 @Module({  
   imports: [
@@ -26,6 +27,7 @@ import { MetaModule } from './module/meta/meta.module';
     UserModule,
     AuthModule,
     MetaModule,
+    PublishModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService],
