@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-02 11:43:11
- * @LastEditTime: 2021-01-05 21:27:00
+ * @LastEditTime: 2021-01-07 00:33:04
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/schema/article.schema.ts
@@ -13,29 +13,36 @@ import { Meta } from './meta.schema'
 
 @Schema()
 export class Article {
-  @Prop(String)
+  @Prop({
+    type: String,
+    trim: true
+  })
   title: string;
 
-  @Prop(String)
+  @Prop()
   content: string;
 
-  @Prop(String)
+  @Prop()
   author_id: string;
 
-  @Prop(String)
+  @Prop()
   desc: string
 
-  @Prop(Number)
+  @Prop()
   add_time: number;
 
-  @Prop(Number)
+  @Prop()
   views: number;
 
-  @Prop(String)
+  @Prop()
   update_time: number;
 
-  @Prop(Number)
+  @Prop()
   hidden: number;
+
+  @Prop([])
+  comment: [];
+
 
   // @Prop(Array)
   // category_id: array;
@@ -51,6 +58,8 @@ export class Article {
     ref: 'Meta'
   }])
   tag_id: Meta[];
+
+
 
   // 文章分类
   // @IsArray()

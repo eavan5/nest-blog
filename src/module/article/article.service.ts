@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-01-05 21:27:55
+ * @LastEditTime: 2021-01-07 00:38:40
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -76,6 +76,22 @@ export class ArticleService {
 
     const result = await this.ArticleModel.updateOne({ _id: id }, { hidden: 1 })
     console.log(result);
+    return {
+      mag: "恭喜您,删除成功"
+    }
 
+  }
+
+  //添加评论
+  async addComment(id: string, body: any): Promise<any | undefined> {
+    try {
+      await this.ArticleModel.findOneAndUpdate({ _id: id }, { '$push': { comment: body } }, { useFindAndModify: false })
+      return {
+        msg: '评论成功'
+      }
+    } catch (error) {
+
+    }
+    
   }
 }

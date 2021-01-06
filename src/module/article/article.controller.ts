@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-01-06 02:22:36
+ * @LastEditTime: 2021-01-07 00:40:12
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
@@ -13,7 +13,9 @@ import { Pagination } from '../../interface/pagination.interface'
 import { Article } from 'src/interface/article.interface';
 import { ValidationPipe } from '../../pipe/validation.pipe';
 import { AddArticleDTO } from './article.dto';
-import { ApiBody, ApiBearerAuth } from '@nestjs/swagger'
+import { AddCommentDTO } from './comment.dto';
+import { ApiBody, ApiBearerAuth, ApiParam } from '@nestjs/swagger'
+import { type } from 'os';
 
 
 @Controller('article')
@@ -61,11 +63,22 @@ export class ArticleController {
     return result
   }
 
+  //删除文章
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiBearerAuth()
+  @ApiParam({ name: '文章ID' })
   deleteArticle(@Param() Param: any) {
     return this.ArticleService.deleteArticle(Param.id)
+  }
+
+  //评论
+  @Post('/:id/comment/')
+  @UsePipes(new ValidationPipe())
+  @ApiParam({ name: '文章ID', required: true })
+  @ApiBody({ type: AddCommentDTO })
+  comment(@Param() param: any, @Body() body: AddCommentDTO) {
+    return this.ArticleService.addComment(param.id, body)
   }
 
 }
