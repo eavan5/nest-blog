@@ -1,14 +1,6 @@
-<!--
- * @Author: your name
- * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-06 18:28:17
- * @LastEditors: wumao
- * @Description: In User Settings Edit
- * @FilePath: /nest-blog/README.md
--->
 # 介绍
 
-> 这是一个由nodejs搭建的博客系统,不断完善中,部分数据库设计借鉴php程序typecho,在一步一步完善中...
+> 这是一个由nodejs搭建的博客系统,不断完善中,后端采用nodejs最好的框架nestjs，使用typescript开发，，以及使用MongoDB数据库，认证部分使用JWT认证，上传接入阿里OSS，接入swagger，内容不断完善中。。。
 
 ## TO DO LIST
 
@@ -19,14 +11,13 @@
   - [x] 用户权限认证
   - [ ] 用户权限细分
  
- - [ ] 公共模块
-  - [x] 接入oss文件上传
-  - [ ] oss文件列表查询
+- [x] 公共模块
+    - [x] 接入oss文件上传
+    - [ ] 网站信息配置
 
 - [ ] 认证模块
-  - [ ] 用户组权限控制
-  - [ ] 用户组新增
-  - [ ] 用户组关联到用户
+  - [ ] 用户组区分
+  - [ ] 用户组权限管理
 
 - [X] META模块(标签/分类)
   - [x] meta查看(根据type)
@@ -41,13 +32,19 @@
   - [x] 文章删除
   - [x] 文章修改
   - [x] 上传的数据进行用pipe做校验
+  - [ ] 相册
+  - [ ] 热门文章
+  - [ ] 随机文章
   - [ ] 文章自增id(目前用的是自带主键ID)
   - [ ] 文章的type(以后用来区分相册,微博这种)
   - [ ] 文章的标签,分类建成一个集,拿组件id关联到文章集合里面
 
 
-- [ ] 评论模块
-  > 这个在纠结到底用第三方模块还是使用自己的
+- [x] 评论模块
+    - [x] 评论新增
+    - [ ] 最新评论
+    - [ ] 评论删除
+    - [ ] 所有评论查询
 
 - [x] 文件存储
   > 已经接入阿里云oss上传
@@ -57,12 +54,43 @@
 - [ ] 前端展示
   > 目前还没想到到底做什么样子的
   
+  # API DOCUMENT
 
-## 技术栈
+> 接口采用RESTful API设计规范
 
-**后端：nestjs + typescript + MongoDB**
+## 文档说明 
 
-**前端：vue3 + typescript**
+> 有auth的接口表示需要token认证,token默认有效期为30天
+
+## 文章模块
+
+> /article/
+
+1. @GET query({pageSize=10,pageCurrent=1}  ) 拉取文章列表
+2. @GET /param(_id:string) param 读取文章详情  
+3. @PUT /param(_id:string)   + body(article:Article) [auth] 修改文章详情
+4. @POST body(article:Article) [auth]  创建文章
+5. @DELETE /param(_id:string)  [auth]  删除文章
+
+### 用户模块
+
+ 
+
+> /user/
+
+1. POST body({name:string,passwd:string}) 注册用户
+2. POST param /login body({name:string,passwd:string}) 用户登录
+
+
+### META模块
+
+> /meta/
+
+> 根据RESTful风格的增删改查
+
+### 评论模块
+> @post /article/:id/comment
+
 
 # 起步
  ```
@@ -98,86 +126,3 @@ $ npm run test:e2e
 ```
 $ npm run test:cov
 ```
-
-# API DOCUMENT
-
-> 接口采用RESTful API设计规范
-
-## 文档说明 
-
-> 有auth的接口表示需要token认证,token默认有效期为30天
-
-## 文章模块
-
-> /article/
-
-1. @GET query({pageSize=10,pageCurrent=1}  ) 拉取文章列表
-2. @GET /param(_id:string) param 读取文章详情  
-3. @PUT /param(_id:string)   + body(article:Article) [auth] 修改文章详情
-4. @POST body(article:Article) [auth]  创建文章
-5. @Delete /param(_id:string)  [auth]  删除文章
-
-### 用户模块
-
- 
-
-> /user/
-
-1. POST body({name:string,passwd:string}) 注册用户
-2. POST param /login body({name:string,passwd:string}) 用户登录
-### META模块
-
- 
-
-> /meta/
-
-> 根据RESTful风格的增删改查
-
-# DATABASE DESCRIPTION
-## 集合
-
-### articles：文章集合
-
-1. _id:文章id（默认主键）
-2. title：文章标题
-3. content：文章内容
-4. author_id:作者id
-5. desc:文章描述
-6. category_id:文章分类id
-7. tag_id：标签id
-8. create_time:发布时间
-9. update_time:更新时间
-10. views:查看次数
-11. hidden:是否隐藏(0是显示,默认是1隐藏)
-
-### commons：评论
-
-1. _id:评论id（默认主键）
-2. name：姓名
-3. email：邮箱
-4. content：内容
-5. create_time:评论时间
-6. connect_id:关联的文章id（外键）
-
-### users:用户
-
-1. _id:用户id（默认主键）
-2. name:用户名
-3. passwd：密码
-4. create_time:创建时间
-5. email：邮箱（头像使用gravatar服务）
-6. salt:盐，加密验证用的随机字符串
-
-### classes：分类以及标签
-
-1. _id:分类id（默认主键）
-2. type: 类型（ tag，category 标签或者是分类）
-3. title：标题
-4. desc：描述
-
-### relationships：关联表
-
-1. _id:ID（默认主键）
-2. article_id:文章id
-3. class_id:分类id
-
