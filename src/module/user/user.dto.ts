@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-04 23:42:00
- * @LastEditTime: 2021-01-05 00:23:14
+ * @LastEditTime: 2021-01-08 00:14:52
  * @LastEditors: wumao
  * @Description:
  * @FilePath: /nest-blog/src/module/user/user.dto.ts

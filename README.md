@@ -2,6 +2,14 @@
 
 > 这是一个由nodejs搭建的博客系统,不断完善中,后端采用nodejs最好的框架nestjs，使用typescript开发，，以及使用MongoDB数据库，认证部分使用JWT认证，上传接入阿里OSS，接入swagger，内容不断完善中。。。
 
+
+## 上线
+v0.0.1已上线
+使用docker虚拟化的nodejs+mongodb+pm2,构建于阿里云服务器
+```
+api地址：http://api.forpad.net
+```
+
 ## TO DO LIST
 
 
@@ -90,7 +98,10 @@
 
 ### 评论模块
 > @post /article/:id/comment
-
+ 
+### 公共模块
+##### 图片上传
+> @post /publish/upload
 
 # 起步
  ```

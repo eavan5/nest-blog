@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-07 23:42:18
+ * @LastEditTime: 2021-01-08 01:12:38
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/app.module.ts
@@ -23,6 +23,8 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({ envFilePath: [`./src/config/${process.env.NODE_ENV}.env`], isGlobal: true },),
     MongooseModule.forRoot(process.env.DATABASE_URL, {
       useNewUrlParser: true,
+      user: `${process.env.DATABASE_USER}`,
+      pass: `${process.env.DATABASE_PASSWD}`,
     }),
     ArticleModule,
     UserModule,
