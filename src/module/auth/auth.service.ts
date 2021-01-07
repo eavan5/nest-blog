@@ -16,16 +16,24 @@ export class AuthService {
   constructor(
     private readonly usersService: UserService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
-  明文
+  明文;
   //校验密码是否相等
-  validatePasswd(encryptionPassword: string, plainTextPassword: string, salt: string) {
-    return encryptionPassword === encryptPassword(plainTextPassword, salt)
+  validatePasswd(
+    encryptionPassword: string,
+    plainTextPassword: string,
+    salt: string,
+  ) {
+    return encryptionPassword === encryptPassword(plainTextPassword, salt);
   }
 
   //校验用户
-  async validateUser(name: string, passwd: string, JwtStrategy?: boolean): Promise<any> {
+  async validateUser(
+    name: string,
+    passwd: string,
+    JwtStrategy?: boolean,
+  ): Promise<any> {
     console.log('JWT验证 - Step 2: 校验用户信息');
     const user = await this.usersService.findOne(name);
     if (user.length === 1) {
@@ -36,22 +44,28 @@ export class AuthService {
       if (hashedPassword === hashPassword) {
         // 密码正确
         if (JwtStrategy) {
-          return user[0]
+          return user[0];
         }
         return this.certificate({ name, passwd });
       } else {
         // 密码错误
-        throw new HttpException({
-          message: '小伙子,密码有问题啊',
-          status: HttpStatus.FORBIDDEN
-        }, 403)
+        throw new HttpException(
+          {
+            message: '小伙子,密码有问题啊',
+            status: HttpStatus.FORBIDDEN,
+          },
+          403,
+        );
       }
     }
     // 查无此人
-    throw new HttpException({
-      message: '小伙子,名字写错了吧?',
-      status: HttpStatus.FORBIDDEN
-    }, 403)
+    throw new HttpException(
+      {
+        message: '小伙子,名字写错了吧?',
+        status: HttpStatus.FORBIDDEN,
+      },
+      403,
+    );
   }
 
   // JWT验证 - 颁发证书
@@ -68,10 +82,13 @@ export class AuthService {
         msg: `恭喜您,登录成功`,
       };
     } catch (error) {
-      throw new HttpException({
-        message: '服务器错误',
-        status: HttpStatus.FORBIDDEN
-      }, 403)
+      throw new HttpException(
+        {
+          message: '服务器错误',
+          status: HttpStatus.FORBIDDEN,
+        },
+        403,
+      );
     }
   }
 }

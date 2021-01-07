@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-06 02:20:14
+ * @LastEditTime: 2021-01-07 23:33:47
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/main.ts
@@ -27,7 +27,8 @@ async function bootstrap() {
   app.enableCors();
 
   //配置swagger
-  const options = new DocumentBuilder().addBearerAuth()
+  const options = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('nest-blog system')
     .setDescription('The nest-blog API description')
     .setVersion('1.0')
@@ -37,5 +38,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
+  // console.log(process.env);
 }
 bootstrap();

@@ -3,7 +3,7 @@
  * @Date: 2021-01-06 22:26:26
  * @LastEditTime: 2021-01-06 22:38:28
  * @LastEditors: wumao
- * @Description: 
+ * @Description:
  * @FilePath: /nest-blog/src/module/article/comment.dto.ts
  * @website: https://www.wumao.org
  */
@@ -37,6 +37,4 @@ export class AddCommentDTO {
     default: '我是评论内容',
   })
   readonly content: string;
-
 }
-

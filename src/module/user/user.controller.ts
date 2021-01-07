@@ -8,21 +8,21 @@
  */
 
 import { Body, Controller, Post, UsePipes } from '@nestjs/common';
-import { UserService } from './user.service'
+import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service';
-import { ValidationPipe } from '../../pipe/validation.pipe'
-import { userDTO } from './user.dto'
+import { ValidationPipe } from '../../pipe/validation.pipe';
+import { userDTO } from './user.dto';
 @Controller('user')
 export class UserController {
   constructor(
     private userService: UserService,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+  ) {}
 
   @UsePipes(new ValidationPipe())
   @Post()
   register(@Body() body: userDTO) {
-    return this.userService.registerUser(body)
+    return this.userService.registerUser(body);
   }
 
   @Post('/login')

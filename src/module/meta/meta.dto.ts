@@ -11,11 +11,11 @@ import { IsNotEmpty, IsIn } from 'class-validator';
 
 export class AddMetaDTO {
   @IsNotEmpty({ message: '名儿不能为空' })
-  readonly name: string
+  readonly name: string;
 
   @IsNotEmpty({ message: '别名不能为空' })
-  readonly alias: string
+  readonly alias: string;
 
   @IsIn([1, 2])
-  readonly type: number
+  readonly type: number;
 }

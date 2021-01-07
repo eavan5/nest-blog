@@ -3,7 +3,7 @@
  * @Date: 2021-01-04 23:42:00
  * @LastEditTime: 2021-01-06 00:33:06
  * @LastEditors: wumao
- * @Description: 
+ * @Description:
  * @FilePath: /nest-blog/src/module/article/article.dto.ts
  * @website: https://www.wumao.org
  */
@@ -11,7 +11,7 @@ import { IsNotEmpty, MaxLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 export class AddArticleDTO {
   @IsNotEmpty({ message: '标题不能为空' })
-  @MaxLength(20, { message: '标题长度不能超过20', })
+  @MaxLength(20, { message: '标题长度不能超过20' })
   @ApiProperty({
     description: '标题',
     minimum: 1,
@@ -47,6 +47,4 @@ export class AddArticleDTO {
   readonly tag_id?: string[];
 
   // readonly tag_id: string[];
-
 }
-

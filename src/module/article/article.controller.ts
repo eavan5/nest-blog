@@ -6,38 +6,48 @@
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
  */
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UsePipes } from '@nestjs/common';
-import { ArticleService } from './article.service'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
+import { ArticleService } from './article.service';
 import { AuthGuard } from '@nestjs/passport';
-import { Pagination } from '../../interface/pagination.interface'
+import { Pagination } from '../../interface/pagination.interface';
 import { Article } from 'src/interface/article.interface';
 import { ValidationPipe } from '../../pipe/validation.pipe';
 import { AddArticleDTO } from './article.dto';
 import { AddCommentDTO } from './comment.dto';
-import { ApiBody, ApiBearerAuth, ApiParam } from '@nestjs/swagger'
+import { ApiBody, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { type } from 'os';
-
 
 @Controller('article')
 export class ArticleController {
-  constructor(private ArticleService: ArticleService) { }
+  constructor(private ArticleService: ArticleService) {}
 
   //文章列表以及分页
   @Get()
   async list(@Query() queryInfo: Pagination) {
-    const { pageCurrent = 1, pageSize = 10 } = queryInfo
-    const articleList = await this.ArticleService.findAll(queryInfo)
-    const total = await this.ArticleService.findCount()
+    const { pageCurrent = 1, pageSize = 10 } = queryInfo;
+    const articleList = await this.ArticleService.findAll(queryInfo);
+    const total = await this.ArticleService.findCount();
     return {
       items: articleList,
-      pageInfo: { total, pageCurrent: +pageCurrent, pageSize: +pageSize }
-    }
+      pageInfo: { total, pageCurrent: +pageCurrent, pageSize: +pageSize },
+    };
   }
 
   //读文章
   @Get(':_id')
   readArticle(@Param() param: Article) {
-    return this.ArticleService.findOne(param._id)
+    return this.ArticleService.findOne(param._id);
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -46,7 +56,7 @@ export class ArticleController {
   @ApiBearerAuth()
   @ApiBody({ type: [AddArticleDTO] })
   addArticle(@Body() body: AddArticleDTO) {
-    return this.ArticleService.addData(body)
+    return this.ArticleService.addData(body);
   }
 
   //修改
@@ -55,12 +65,12 @@ export class ArticleController {
   @Put(':id')
   @ApiBearerAuth()
   @ApiBody({ type: [AddArticleDTO] })
-  async updateArticle(
-    @Param() param: any,
-    @Body() body: AddArticleDTO
-  ) {
-    const result = await this.ArticleService.updateArticle({ _id: param.id }, body)
-    return result
+  async updateArticle(@Param() param: any, @Body() body: AddArticleDTO) {
+    const result = await this.ArticleService.updateArticle(
+      { _id: param.id },
+      body,
+    );
+    return result;
   }
 
   //删除文章
@@ -69,7 +79,7 @@ export class ArticleController {
   @ApiBearerAuth()
   @ApiParam({ name: '文章ID' })
   deleteArticle(@Param() Param: any) {
-    return this.ArticleService.deleteArticle(Param.id)
+    return this.ArticleService.deleteArticle(Param.id);
   }
 
   //评论
@@ -78,7 +88,6 @@ export class ArticleController {
   @ApiParam({ name: '文章ID', required: true })
   @ApiBody({ type: AddCommentDTO })
   comment(@Param() param: any, @Body() body: AddCommentDTO) {
-    return this.ArticleService.addComment(param.id, body)
+    return this.ArticleService.addComment(param.id, body);
   }
-
 }

@@ -19,7 +19,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const errorResponse = {
       // data: {
       //   error: message,
-      // }, 
+      // },
       msg: message,
       code: 0, // 自定义code
       url: request.originalUrl, // 错误的url地址

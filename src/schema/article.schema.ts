@@ -8,14 +8,13 @@
  */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
-import { Meta } from './meta.schema'
-
+import { Meta } from './meta.schema';
 
 @Schema()
 export class Article {
   @Prop({
     type: String,
-    trim: true
+    trim: true,
   })
   title: string;
 
@@ -26,7 +25,7 @@ export class Article {
   author_id: string;
 
   @Prop()
-  desc: string
+  desc: string;
 
   @Prop()
   add_time: number;
@@ -43,23 +42,24 @@ export class Article {
   @Prop([])
   comment: [];
 
-
   // @Prop(Array)
   // category_id: array;
 
-  @Prop([{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Meta'
-  }])
+  @Prop([
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Meta',
+    },
+  ])
   category_id: Meta[];
 
-  @Prop([{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Meta'
-  }])
+  @Prop([
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Meta',
+    },
+  ])
   tag_id: Meta[];
-
-
 
   // 文章分类
   // @IsArray()
@@ -67,10 +67,6 @@ export class Article {
   // @ArrayUnique()
   // @prop({ ref: () => Category, required: true, index: true })
   // category: Ref<Category>[];
-
-
-
-
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);

@@ -8,7 +8,6 @@
  */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-
 @Schema()
 export class User {
   @Prop(String)
@@ -16,7 +15,7 @@ export class User {
 
   @Prop(String)
   passwd?: string;
-  
+
   @Prop(String)
   create_time?: string;
 
@@ -28,4 +27,3 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
-

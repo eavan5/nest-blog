@@ -10,7 +10,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JWT_CONFIG } from '../../app.config';
-import { AuthService } from './auth.service.js'
+import { AuthService } from './auth.service.js';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -28,12 +28,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     console.log(payload);
 
-    const user = await this.AuthService.validateUser(payload.name, payload.passwd, true);
+    const user = await this.AuthService.validateUser(
+      payload.name,
+      payload.passwd,
+      true,
+    );
     console.log(user);
 
     if (!user) {
       throw new UnauthorizedException({
-        message: '没有权限'
+        message: '没有权限',
       });
     }
     return payload;

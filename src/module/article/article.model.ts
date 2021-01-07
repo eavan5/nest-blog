@@ -11,6 +11,6 @@ export function getDefaultOptions() {
   return {
     add_time: Date.now(),
     views: 0,
-    hidden: 0
-  }
+    hidden: 0,
+  };
 }
