@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-02 11:43:11
- * @LastEditTime: 2021-01-07 00:33:04
+ * @LastEditTime: 2021-01-10 00:06:03
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/schema/article.schema.ts
@@ -26,6 +26,9 @@ export class Article {
 
   @Prop()
   desc: string;
+
+  @Prop()
+  headPic: string;
 
   @Prop()
   add_time: number;
