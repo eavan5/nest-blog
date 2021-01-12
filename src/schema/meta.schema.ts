@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-04 17:25:57
- * @LastEditTime: 2021-01-04 22:16:39
+ * @LastEditTime: 2021-01-13 00:44:20
  * @LastEditors: wumao
  * @Description:
  * @FilePath: /nest-blog/src/schema/meta.schema.ts
@@ -27,6 +27,15 @@ export class Meta {
 
   @Prop(String)
   desc: string;
+
+  @Prop({ type: Array })
+  parent?: { _id?: string, name?: string, alias?: string, desc?: string, type?: number }
+
+  @Prop({ type: Array })
+  children?: [{ _id: string, name: string, alias: string, desc: string }];
+
+  @Prop(Array)
+  articleList?: string[]
 }
 
 export const MetaSchema = SchemaFactory.createForClass(Meta);

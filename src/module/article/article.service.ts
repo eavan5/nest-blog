@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-01-07 00:38:40
+ * @LastEditTime: 2021-01-12 00:36:12
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -48,7 +48,7 @@ export class ArticleService {
         .populate('tag_id');
       return {
         msg: 'success',
-        data: article,
+        articleData: article,
       };
     } catch (error) {
       throw new NotFoundException({
