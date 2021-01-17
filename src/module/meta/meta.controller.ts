@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-04 16:54:00
- * @LastEditTime: 2021-01-06 02:23:12
+ * @LastEditTime: 2021-01-17 15:01:35
  * @LastEditors: wumao
  * @Description:
  * @FilePath: /nest-blog/src/module/meta/meta.controller.ts
@@ -53,4 +53,11 @@ export class MetaController {
   changeMeta(@Param() param: any, @Body() body: AddMetaDTO) {
     return this.MetaService.changeMeta(param._id, body);
   }
+
+  // @Get('/article/:_id')
+  // articleList(@Param() param: string) {
+  //   console.log(1);
+
+  //   return this.MetaService.getArticleList(param)
+  // }
 }

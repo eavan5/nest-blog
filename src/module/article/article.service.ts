@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-01-12 00:36:12
+ * @LastEditTime: 2021-01-17 15:59:20
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -22,7 +22,7 @@ export class ArticleService {
   constructor(
     @InjectModel('Article') private ArticleModel,
     @InjectModel('Meta') private MetaModel,
-  ) {}
+  ) { }
 
   //查询列表带分页
   async findAll(
@@ -40,12 +40,10 @@ export class ArticleService {
   async findOne(id: string): Promise<any> {
     try {
       const article = await this.ArticleModel.findOneAndUpdate(
-        { _id: id, hidden: 0 },
+        { _id: id },
         { $inc: { views: 1 } },
         { useFindAndModify: false },
-      )
-        .populate('category_id')
-        .populate('tag_id');
+      ).populate('tag_list');
       return {
         msg: 'success',
         articleData: article,
@@ -116,6 +114,22 @@ export class ArticleService {
       return {
         msg: '评论成功',
       };
-    } catch (error) {}
+    } catch (error) { }
+  }
+
+  //查找分类或者标签下的文章
+  async getMetaArticleList(type, _id, pageInfo): Promise<any | undefined> {
+    // console.log(id);
+
+    const { pageSize = 10, pageCurrent = 1 } = pageInfo;
+    const res = await this.ArticleModel.find({ [`${type}_id`]: { $elemMatch: { $eq: _id } } }).select('-content')
+      .skip((pageCurrent - 1) * pageSize)
+      .limit(+pageSize);
+    console.log(res);
+    return res
+
+    // this.ArticleModel.where({ `type_id`:{$equal:}})
+
+
   }
 }

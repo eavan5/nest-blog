@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-04 17:25:57
- * @LastEditTime: 2021-01-13 00:44:20
+ * @LastEditTime: 2021-01-17 14:41:43
  * @LastEditors: wumao
  * @Description:
  * @FilePath: /nest-blog/src/schema/meta.schema.ts
@@ -9,6 +9,8 @@
  */
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import * as mongoose from 'mongoose';
+import { Article } from './article.schema'
 
 @Schema()
 export class Meta {
@@ -28,14 +30,14 @@ export class Meta {
   @Prop(String)
   desc: string;
 
-  @Prop({ type: Array })
-  parent?: { _id?: string, name?: string, alias?: string, desc?: string, type?: number }
+  @Prop(Number)
+  order: number;
 
-  @Prop({ type: Array })
-  children?: [{ _id: string, name: string, alias: string, desc: string }];
-
-  @Prop(Array)
-  articleList?: string[]
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Article',
+  })
+  article_list?: Article[]
 }
 
 export const MetaSchema = SchemaFactory.createForClass(Meta);

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-01-07 00:40:12
+ * @LastEditTime: 2021-01-17 15:56:59
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
@@ -90,4 +90,12 @@ export class ArticleController {
   comment(@Param() param: any, @Body() body: AddCommentDTO) {
     return this.ArticleService.addComment(param.id, body);
   }
+
+  //根据标签ID查询查询文章列表带分页
+  @Get('/meta/:type/:_id')
+  getList(@Param() param: any, @Query() pageInfo: Pagination) {
+    const { type, _id } = param
+    return this.ArticleService.getMetaArticleList(type, _id, pageInfo)
+  }
+
 }

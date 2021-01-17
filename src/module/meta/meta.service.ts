@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-04 17:24:16
- * @LastEditTime: 2021-01-04 22:48:42
+ * @LastEditTime: 2021-01-17 15:01:27
  * @LastEditors: wumao
  * @Description:
  * @FilePath: /nest-blog/src/module/meta/meta.service.ts
@@ -43,4 +43,12 @@ export class MetaService {
     return { msg: '修改成功' };
     // }
   }
+
+  // async getArticleList(_id: string,body:any) {
+  //   console.log(_id);
+  //   const { pageSize = 10, pageCurrent = 1 } = body;
+  //   const res = await this.MetaModel.findOne({ _id }).populate({ path: 'article_list', select: 'content' }).
+  //   console.log(res);
+
+  // }
 }
