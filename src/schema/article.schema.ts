@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-02 11:43:11
- * @LastEditTime: 2021-01-17 15:48:57
+ * @LastEditTime: 2021-02-02 22:36:58
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/schema/article.schema.ts
@@ -45,26 +45,6 @@ export class Article {
   @Prop([])
   comment: [];
 
-  // @Prop([])
-  // category_list: [];
-
-  // @Prop([])
-  // tag_list: [];
-
-  // @Prop([
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'Meta',
-  //   },
-  // ])
-  // category_id: Meta[];
-
-  // @Prop([])
-  // categoryList: [];
-
-
-  @Prop(Array)
-  category_id: [string];
 
   @Prop([
     {
@@ -72,11 +52,7 @@ export class Article {
       ref: 'Meta',
     },
   ])
-  category_list: Meta[];
-
-  @Prop(Array)
-  tag_id: [string];
-
+  category_id: Meta[];
 
   @Prop([
     {
@@ -84,7 +60,7 @@ export class Article {
       ref: 'Meta',
     },
   ])
-  tag_list: Meta[];
+  tag_id: Meta[];
 
   // 文章分类
   // @IsArray()

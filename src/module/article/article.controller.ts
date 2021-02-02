@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-01-17 15:56:59
+ * @LastEditTime: 2021-02-02 23:11:42
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
@@ -20,7 +20,7 @@ import {
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { AuthGuard } from '@nestjs/passport';
-import { Pagination } from '../../interface/pagination.interface';
+import { ArticleList, Pagination } from '../../interface/pagination.interface';
 import { Article } from 'src/interface/article.interface';
 import { ValidationPipe } from '../../pipe/validation.pipe';
 import { AddArticleDTO } from './article.dto';
@@ -34,10 +34,12 @@ export class ArticleController {
 
   //文章列表以及分页
   @Get()
-  async list(@Query() queryInfo: Pagination) {
+  async list(@Query() queryInfo: ArticleList) {
+    // console.log(queryInfo);
+
     const { pageCurrent = 1, pageSize = 10 } = queryInfo;
     const articleList = await this.ArticleService.findAll(queryInfo);
-    const total = await this.ArticleService.findCount();
+    const total = await this.ArticleService.findAll(queryInfo, true);;
     return {
       items: articleList,
       pageInfo: { total, pageCurrent: +pageCurrent, pageSize: +pageSize },
@@ -83,7 +85,7 @@ export class ArticleController {
   }
 
   //评论
-  @Post('/:id/comment/')
+  @Post('/:id/comments/')
   @UsePipes(new ValidationPipe())
   @ApiParam({ name: '文章ID', required: true })
   @ApiBody({ type: AddCommentDTO })

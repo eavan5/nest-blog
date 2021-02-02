@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-01-17 15:59:20
+ * @LastEditTime: 2021-02-02 23:11:21
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Article } from '../../interface/article.interface';
-import { Pagination } from '../../interface/pagination.interface';
+import { ArticleList } from '../../interface/pagination.interface';
 import { getDefaultOptions } from './article.model';
 
 @Injectable()
@@ -26,14 +26,29 @@ export class ArticleService {
 
   //查询列表带分页
   async findAll(
-    params: Pagination = {},
+    params: ArticleList = {},
+    getTotal?: boolean,
     fields?: string,
   ): Promise<any | undefined> {
-    const { pageSize = 10, pageCurrent = 1 } = params;
-    return await this.ArticleModel.find({}, fields)
-      .sort({ _id: -1 })
-      .skip((pageCurrent - 1) * pageSize)
-      .limit(+pageSize);
+    const { pageSize = 10, pageCurrent = 1, tagId, categoryId } = params;
+    let searchParams = { tag_id: tagId, category_id: categoryId }
+    searchParams = JSON.parse(JSON.stringify(searchParams))
+    const searchParamsTemp = {}
+    for (const key in searchParams) {
+      searchParamsTemp[key] = {
+        $elemMatch: { $eq: searchParams[key] }
+      }
+    }
+    if (getTotal) {
+      return await this.ArticleModel.find(searchParamsTemp, fields).countDocuments()
+    } else {
+      return await this.ArticleModel.find(searchParamsTemp, fields)
+        .select('-content')
+        .sort({ _id: -1 })
+        .skip((pageCurrent - 1) * pageSize)
+        .limit(+pageSize);
+    }
+  
   }
 
   //查找文章
@@ -43,7 +58,7 @@ export class ArticleService {
         { _id: id },
         { $inc: { views: 1 } },
         { useFindAndModify: false },
-      ).populate('tag_list');
+      ).populate('category_id').populate("tag_id").exec();
       return {
         msg: 'success',
         articleData: article,
@@ -119,8 +134,6 @@ export class ArticleService {
 
   //查找分类或者标签下的文章
   async getMetaArticleList(type, _id, pageInfo): Promise<any | undefined> {
-    // console.log(id);
-
     const { pageSize = 10, pageCurrent = 1 } = pageInfo;
     const res = await this.ArticleModel.find({ [`${type}_id`]: { $elemMatch: { $eq: _id } } }).select('-content')
       .skip((pageCurrent - 1) * pageSize)
