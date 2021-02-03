@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-02-02 23:11:42
+ * @LastEditTime: 2021-02-03 15:47:47
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
@@ -30,7 +30,7 @@ import { type } from 'os';
 
 @Controller('article')
 export class ArticleController {
-  constructor(private ArticleService: ArticleService) {}
+  constructor(private ArticleService: ArticleService) { }
 
   //文章列表以及分页
   @Get()
@@ -44,6 +44,12 @@ export class ArticleController {
       items: articleList,
       pageInfo: { total, pageCurrent: +pageCurrent, pageSize: +pageSize },
     };
+  }
+
+  //获取热门文章
+  @Get('/hot/:length')
+  hotList(@Param() param: string) {
+    return this.ArticleService.getHotArticlesList(+param.length)
   }
 
   //读文章

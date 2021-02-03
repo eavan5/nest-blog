@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-02-02 23:11:21
+ * @LastEditTime: 2021-02-03 15:48:36
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -23,6 +23,11 @@ export class ArticleService {
     @InjectModel('Article') private ArticleModel,
     @InjectModel('Meta') private MetaModel,
   ) { }
+
+  //获取最热的文章
+  async getHotArticlesList(length: number): Promise<any | undefined> {
+    return await this.ArticleModel.find({ views: { $gt: 20 } }).sort({ views: -1 }).limit(length)
+  }
 
   //查询列表带分页
   async findAll(
@@ -48,7 +53,7 @@ export class ArticleService {
         .skip((pageCurrent - 1) * pageSize)
         .limit(+pageSize);
     }
-  
+
   }
 
   //查找文章
