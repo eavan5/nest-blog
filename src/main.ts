@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 10:59:57
- * @LastEditTime: 2021-01-08 01:01:21
+ * @LastEditTime: 2021-02-04 01:36:52
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/main.ts
@@ -14,7 +14,6 @@ import { TransformInterceptor } from './interceptor/transform.interceptor';
 // import * as compression from 'compression';
 import * as helmet from 'helmet';
 async function bootstrap() {
-  console.log(process.env);
 
   const app = await NestFactory.create(AppModule, { cors: true });
   // 错误拦截中间件
