@@ -1,7 +1,7 @@
 /*
  * @Author: wumao
  * @Date: 2021-01-02 12:04:38
- * @LastEditTime: 2021-01-05 13:50:05
+ * @LastEditTime: 2021-02-07 18:00:01
  * @LastEditors: wumao
  * @Description:
  * @FilePath: /nest-blog/src/module/article/article.module.ts
@@ -15,6 +15,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ArticleSchema } from '../../schema/article.schema';
 import { MetaSchema } from '../../schema/meta.schema';
 import { ArticleService } from './article.service';
+// import moment from 'moment';
 @Module({
   imports: [
     MongooseModule.forFeature([
@@ -35,4 +36,4 @@ import { ArticleService } from './article.service';
   controllers: [ArticleController],
   providers: [ArticleService],
 })
-export class ArticleModule {}
+export class ArticleModule { }

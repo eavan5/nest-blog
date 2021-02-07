@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:05:04
- * @LastEditTime: 2021-02-03 15:47:47
+ * @LastEditTime: 2021-02-07 17:54:34
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.controller.ts
@@ -45,6 +45,12 @@ export class ArticleController {
       pageInfo: { total, pageCurrent: +pageCurrent, pageSize: +pageSize },
     };
   }
+
+  @Get('/archive')
+  getArchive() {
+    return this.ArticleService.archive()
+  }
+
 
   //获取热门文章
   @Get('/hot/:length')

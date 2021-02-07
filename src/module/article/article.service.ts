@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-02-03 15:48:36
+ * @LastEditTime: 2021-02-07 23:01:03
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -16,12 +16,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Article } from '../../interface/article.interface';
 import { ArticleList } from '../../interface/pagination.interface';
 import { getDefaultOptions } from './article.model';
+// import { Inject } from '@nestjs/common';
 
 @Injectable()
 export class ArticleService {
   constructor(
     @InjectModel('Article') private ArticleModel,
     @InjectModel('Meta') private MetaModel,
+    // @Inject('moment') private moment: moment.Moment
   ) { }
 
   //获取最热的文章
@@ -49,6 +51,8 @@ export class ArticleService {
     } else {
       return await this.ArticleModel.find(searchParamsTemp, fields)
         .select('-content')
+        .populate('category_id')
+        .populate("tag_id")
         .sort({ _id: -1 })
         .skip((pageCurrent - 1) * pageSize)
         .limit(+pageSize);
@@ -149,5 +153,23 @@ export class ArticleService {
     // this.ArticleModel.where({ `type_id`:{$equal:}})
 
 
+  }
+
+  // 获取文章归档
+  async archive() {
+    const res = await this.ArticleModel.find()
+      .select('title add_time')
+    // console.log(res);
+    // res.reduce((total, current) => {
+
+    // },{})
+    res.forEach(item => {
+      console.log(item);
+
+      // console.log(moment);
+
+
+    })
+    return res
   }
 }
