@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-02-08 14:05:43
+ * @LastEditTime: 2021-02-08 14:10:55
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -177,8 +177,6 @@ export class ArticleService {
       }
     })
     yearArr.sort((a, b) => b.year - a.year)
-    console.log(yearArr);
-
     return yearArr
   }
 }
