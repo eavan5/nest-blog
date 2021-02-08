@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 12:52:05
- * @LastEditTime: 2021-02-07 23:01:03
+ * @LastEditTime: 2021-02-08 14:05:43
  * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/article/article.service.ts
@@ -16,6 +16,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Article } from '../../interface/article.interface';
 import { ArticleList } from '../../interface/pagination.interface';
 import { getDefaultOptions } from './article.model';
+import * as dayjs from 'dayjs'
 // import { Inject } from '@nestjs/common';
 
 @Injectable()
@@ -159,17 +160,25 @@ export class ArticleService {
   async archive() {
     const res = await this.ArticleModel.find()
       .select('title add_time')
-    // console.log(res);
-    // res.reduce((total, current) => {
-
-    // },{})
+    const yearArr = []
     res.forEach(item => {
-      console.log(item);
-
-      // console.log(moment);
-
-
+      const itemYear = dayjs(+item.add_time).year()
+      const index = yearArr.findIndex(i => i.year === itemYear)
+      // const item2 = { ...item }
+      // delete item2.add_time
+      if (index > -1) {
+        yearArr[index].list.push(item)
+        yearArr[index].list.sort((a, b) => b.add_time - a.add_time)
+      } else {
+        yearArr.push({
+          year: +itemYear,
+          list: [item]
+        })
+      }
     })
-    return res
+    yearArr.sort((a, b) => b.year - a.year)
+    console.log(yearArr);
+
+    return yearArr
   }
 }
