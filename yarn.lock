@@ -5416,6 +5416,11 @@ lunr@^2.3.6:
   resolved "https://registry.npm.taobao.org/lunr/download/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
   integrity sha1-GLEjFCgyM33W6WTfGlp3B7JdNeE=
 
+luxon@^1.25.0:
+  version "1.26.0"
+  resolved "https://registry.npm.taobao.org/luxon/download/luxon-1.26.0.tgz#d3692361fda51473948252061d0f8561df02b578"
+  integrity sha1-02kjYf2lFHOUglIGHQ+FYd8CtXg=
+
 macos-release@^2.2.0:
   version "2.4.1"
   resolved "https://registry.npm.taobao.org/macos-release/download/macos-release-2.4.1.tgz#64033d0ec6a5e6375155a74b1a1eba8e509820ac"

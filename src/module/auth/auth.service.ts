@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-02 23:04:08
- * @LastEditTime: 2021-01-03 03:32:31
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-04-09 16:19:51
+ * @LastEditors: wumao
  * @Description: In User Settings Edit
  * @FilePath: /nest-blog/src/module/auth/auth.service.ts
  */
@@ -52,9 +52,9 @@ export class AuthService {
         throw new HttpException(
           {
             message: '小伙子,密码有问题啊',
-            status: HttpStatus.FORBIDDEN,
+            status: HttpStatus.OK,
           },
-          403,
+          HttpStatus.OK,
         );
       }
     }
@@ -62,9 +62,9 @@ export class AuthService {
     throw new HttpException(
       {
         message: '小伙子,名字写错了吧?',
-        status: HttpStatus.FORBIDDEN,
+        status: HttpStatus.OK,
       },
-      403,
+      HttpStatus.OK,
     );
   }
 
